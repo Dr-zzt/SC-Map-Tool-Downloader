@@ -14,7 +14,7 @@ Downloader.ps1 파일을 실행해 주세요. 윈도우 기본 설정대로라�
 ## 
 
 다운로드하는 프로그램 목록 (각각 다운로드 여부 선택 가능):
-* 스타크래프트 mpq (https://drive.google.com/drive/folders/1L-fJDZpuCpfIUGnEHYzjQEeyjwnswDdS)
+* 스타크래프트 mpq (https://drive.google.com/file/d/14-cQq20uL2gpKIfu6hMidH9Ue-drM-d3)
 * EUDDraft (https://github.com/armoha/euddraft)
 * SCMDraft 2 (http://www.stormcoast-fortress.net/Irregularies/, 2020.06.24 버전)
 * EUD Editor 2 (https://github.com/armoha/EUDEditor/)
