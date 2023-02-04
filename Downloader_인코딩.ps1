@@ -90,6 +90,8 @@ foreach ($Key in $ee2_series) {
     }
 }
 
+$ProgressPreference = 'SilentlyContinue'
+
 foreach ($Key in $items_to_download.Keys) {
     Write-Host "$Key 파일을 다운로드합니다."
     New-Item -Path "$current_location\" -Name $items_to_download[$Key] -ItemType "directory" # mkdir
@@ -102,7 +104,7 @@ foreach ($Key in $items_to_download.Keys) {
         }
         "EUDDraft" {
             $archive_filename = "EUDDraft.zip"
-            $latest_version = (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/armoha/euddraft/master/latest/VERSION").Content
+            $latest_version = (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/armoha/euddraft/master/latest/VERSION" -UseBasicParsing).Content
             $file_url = 'https://github.com/armoha/euddraft/releases/download/v{0}/euddraft{0}.zip' -f $latest_version
         }
         "SCMDraft" {
@@ -111,21 +113,21 @@ foreach ($Key in $items_to_download.Keys) {
         }
         "EUD Editor 3" {
             $archive_filename = "EUD Editor 3.zip"
-            $file_url = (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Buizz/EUD-Editor-3/master/EUD%20Editor%203/Version.txt").Content.Split()[1]
+            $file_url = (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Buizz/EUD-Editor-3/master/EUD%20Editor%203/Version.txt" -UseBasicParsing).Content.Split()[1]
         }
         "EUD Editor 2" {
             $archive_filename = "EUD Editor 2.zip"
-            $file_url = (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/armoha/EUDEditor/master/version/version").Content.Split()[1]
+            $file_url = (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/armoha/EUDEditor/master/version/version" -UseBasicParsing).Content.Split()[1]
         }
         "EUD Editor 2 SE" {
             $archive_filename = "EUD Editor 2 SE.zip"
-            $file_url = (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/iDoodler-DS/EUDEditor/master/version/version").Content.Split()[1]
+            $file_url = (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/iDoodler-DS/EUDEditor/master/version/version" -UseBasicParsing).Content.Split()[1]
         }        
     }
-    Invoke-WebRequest -Uri $file_url -OutFile "$current_location/$archive_filename"
-    Write-Host -Prompt "$Key 파일 다운로드가 완료되었습니다. 압축을 해제합니다."
+    Invoke-WebRequest -Uri $file_url -OutFile "$current_location/$archive_filename" -UseBasicParsing
+    Write-Host "$Key 파일 다운로드가 완료되었습니다. 압축을 해제합니다."
     Expand-Archive "$current_location/$archive_filename" -DestinationPath "$current_location/$($items_to_download[$Key])"
-    Write-Host -Prompt "$Key 파일 압축 해제가 완료되었습니다."
+    Write-Host "$Key 파일 압축 해제가 완료되었습니다."
 }
 
 Read-Host -Prompt "모든 다운로드가 완료되었습니다. 엔터를 누르면 이 창이 닫힙니다."
